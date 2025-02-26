@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIGADOOD</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    
+    #intro-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #059c00;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        animation: fadeLoader 3.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        overflow: hidden;
+    }
+    
+    #intro-logo {
+        width: 60%;
+        max-width: 600px;
+        animation: zoomIn 3.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+        transform-origin: center;
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+    }
+    
+    @keyframes fadeLoader {
+        0% {
+            opacity: 1;
+            background-color: #059c00;
+        }
+        50% {
+            opacity: 1;
+            background-color: #059c00;
+        }
+        75% {
+            opacity: 0.7;
+            background-color: rgba(5, 156, 0, 0.8);
+        }
+        100% {
+            opacity: 0;
+            background-color: rgba(5, 156, 0, 0);
+        }
+    }
+    
+    @keyframes zoomIn {
+        0% {
+            transform: scale(0.2);
+            opacity: 0.5;
+            filter: blur(0);
+        }
+        30% {
+            transform: scale(0.6);
+            opacity: 1;
+            filter: blur(0);
+        }
+        60% {
+            transform: scale(2);
+            opacity: 0.8;
+            filter: blur(1px);
+        }
+        80% {
+            transform: scale(5);
+            opacity: 0.4;
+            filter: blur(2px);
+        }
+        100% {
+            transform: scale(12);
+            opacity: 0;
+            filter: blur(4px);
+        }
+    }
+
+        .hero-section {
+                    height: 100vh;
+                    width: 100%;
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    background: radial-gradient(circle at center, #ffcc00 0%, #ff4400 100%);
+                    overflow: hidden;
+                    z-index: 1;
+                    animation: background-pan 10s linear infinite, fade-in 1s ease-in-out;
+                }
+        
+                @keyframes fade-in {
+                    from {
+                        opacity: 0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
+                }
+
+        .content-section {
+            min-height: 100vh;
+            width: 100%;
+            background: #1a1a1a url('gigatemp.jpg') top center/cover scroll;
+            position: relative;
+            z-index: 2;
+            margin-top: 0;
+            color: white;
+        }
+
+        .scrolling-banner {
+            width: 100%;
+            height: 100px;
+            background: #000;
+            overflow: hidden;
+            position: relative;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+
+        .scrolling-banner {
+            position: relative;
+        }
+        
+        .scrolling-text {
+            position: absolute;
+            font-size: 72px;
+            font-weight: 900;
+            color: white;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            letter-spacing: 2px;
+            animation: scrollText 20s linear infinite;
+            padding-right: 0;
+        }
+        
+        .scrolling-text::after {
+            content: "$GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD";
+            padding-left: 50px;
+        }
+
+        @keyframes scrollText {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .about-section {
+                    padding: 50px;
+                    max-width: 800px;
+                    margin: 50px auto;
+                    background: rgba(26, 26, 26, 0.9);
+                    border-radius: 15px;
+                    opacity: 0;
+                    transform: translateY(50px);
+                    transition: opacity 1s ease-out, transform 1s ease-out;
+                }
+        
+                .about-section.active {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+        .about-title {
+            font-size: 64px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .about-text {
+            font-size: 20px;
+            line-height: 1.6;
+            color: white;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .sunburst {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: max(200vw, 200vh);
+            height: max(200vw, 200vh);
+            background: repeating-conic-gradient(
+                from 0deg,
+                #059c00 0deg 20deg,
+                #ff8800 20deg 40deg
+            );
+            z-index: -1;
+            animation: rotate 20s linear infinite;
+            transform-origin: center;
+        }
+
+        .title {
+            width: 450px;
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .title img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Tablet Responsiveness */
+        @media (max-width: 768px) {
+            .content-section,
+            .tokenomics-section {
+                background-attachment: scroll !important;
+                background-size: cover !important;
+                background-position: center !important;
+            }
+
+            .scrolling-banner {
+                height: 80px;
+            }
+            
+            .scrolling-text {
+                font-size: 48px;
+            }
+            
+            .scrolling-text::after {
+                font-size: 48px;
+            }
+
+            .title {
+                width: 300px;
+                top: 1rem;
+            }
+
+            .logo-container {
+                width: 270px;
+                height: 270px;
+            }
+
+            .social-icons {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+                bottom: 2rem;
+                width: 90%;
+            }
+
+            .social-icons a {
+                width: 60px;
+                height: 60px;
+            }
+
+            .social-icons img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .tokenomics-container {
+                padding: 30px;
+                margin: 30px 15px;
+            }
+
+            .tokenomics-title {
+                font-size: 42px;
+            }
+
+            .tokenomics-text {
+                font-size: 16px;
+            }
+
+            .tokenomics-highlight {
+                font-size: 20px;
+            }
+
+            .tokenomics-list li {
+                font-size: 16px;
+            }
+
+            footer {
+                padding: 15px;
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .footer-logo {
+                width: 80px;
+            }
+
+            .footer-social {
+                gap: 8px;
+            }
+
+            .footer-social a {
+                width: 36px;
+                height: 36px;
+            }
+
+            .footer-social img {
+                width: 18px;
+                height: 18px;
+            }
+
+            .buy-now {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+
+            .merch {
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            /* Fix for the about section on tablets */
+            .content-section > div[style] {
+                width: 80% !important;
+                float: none !important;
+                margin: 0 auto !important;
+                padding-top: 30px;
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 480px) {
+            .hero-section {
+                justify-content: center;
+            }
+            
+            .title {
+                width: 225px;
+                top: 1.5rem;
+            }
+
+            .logo-container {
+                width: 225px;
+                height: 225px;
+                border-width: 3px;
+            }
+
+            .social-icons {
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: center;
+                gap: min(2vw, 0.5rem);
+                position: absolute;
+                bottom: 3rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+            }
+
+            .social-icons a {
+                width: calc(20vw - 10px);
+                max-width: 45px;
+                min-width: 30px;
+                height: calc(20vw - 10px);
+                max-height: 45px;
+                min-height: 30px;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .social-icons img {
+                width: calc(10vw - 5px);
+                max-width: 22px;
+                min-width: 15px;
+                height: calc(10vw - 5px);
+                max-height: 22px;
+                min-height: 15px;
+            }
+
+            .scrolling-banner {
+                height: 60px;
+            }
+
+            .scrolling-text, 
+            .scrolling-text::after {
+                font-size: 36px;
+            }
+            
+            /* Fix for the about section on mobile */
+            .content-section > div[style] {
+                width: 90% !important;
+                padding-top: 20px;
+            }
+            
+            .content-section > div[style] img {
+                width: 200px !important;
+            }
+            
+            .content-section > div[style] p[style*="font-size: 28px"] {
+                font-size: 24px !important;
+            }
+            
+            .content-section > div[style] p[style*="font-size: 22px"] {
+                font-size: 18px !important;
+            }
+
+            .tokenomics-title {
+                font-size: 32px;
+            }
+            
+            .tokenomics-container {
+                padding: 20px;
+                margin: 20px 15px;
+            }
+
+            .tokenomics-highlight {
+                font-size: 18px;
+            }
+            
+            .tokenomics-list li {
+                font-size: 15px;
+                margin: 10px 0;
+            }
+            
+            .tokenomics-text {
+                font-size: 15px;
+            }
+            
+            .footer-logo {
+                width: 70px;
+            }
+            
+            .footer-text {
+                font-size: 0.9rem;
+            }
+            
+            .buy-now {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Small Mobile Devices */
+        @media (max-width: 360px) {
+            .title {
+                width: 180px;
+            }
+            
+            .logo-container {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .social-icons a {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .social-icons img {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .scrolling-text, 
+            .scrolling-text::after {
+                font-size: 28px;
+            }
+            
+            .scrolling-banner {
+                height: 50px;
+            }
+            
+            .content-section > div[style] img {
+                width: 150px !important;
+            }
+            
+            .content-section > div[style] p[style*="font-size: 28px"] {
+                font-size: 20px !important;
+            }
+            
+            .content-section > div[style] p[style*="font-size: 22px"] {
+                font-size: 16px !important;
+            }
+            
+            .tokenomics-title {
+                font-size: 28px;
+            }
+            
+            .tokenomics-highlight {
+                font-size: 16px;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.03); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .logo-container {
+            width: 330px;
+            height: 330px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #ff4400;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 2.5rem;
+            position: absolute;
+            bottom: 5.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .social-icons a {
+            width: 75px;
+            height: 75px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 68, 0, 0.5);
+            background: #ff4400;
+        }
+
+        .social-icons img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .merch {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            z-index: 2;
+        }
+
+        .cart-icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        footer {
+            background: #ff3300;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 3;
+        }
+
+        .footer-logo {
+            width: 150px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .footer-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .footer-social a {
+            width: 42px;
+            height: 42px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            transform: translateY(-3px);
+        }
+
+        .footer-social img {
+            width: 22px;
+            height: 22px;
+        }
+
+        .footer-text {
+            color: white;
+            font-weight: 900;
+            font-size: 1rem;
+            letter-spacing: 1.5px;
+            margin-top: -4px;
+        }
+
+        .buy-now {
+            background: white;
+            color: black;
+            padding: 12px 35px;
+            border-radius: 100px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .buy-now:hover {
+            transform: translateY(-3px);
+        }
+
+        .tokenomics-section {
+                    min-height: 100vh;
+                    width: 100%;
+                    background: #1a1a1a url('GUESS.jpg') center/cover fixed;
+                            
+                    color: white;
+                    padding: 50px 0;
+                    opacity: 0;
+                    transform: translateY(50px);
+                    transition: opacity 1s ease-out, transform 1s ease-out;
+                }
+        
+                .tokenomics-section.active {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+        .tokenomics-container {
+            padding: 50px;
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 15px;
+        }
+
+        .tokenomics-title {
+            font-size: 64px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .tokenomics-text {
+            font-size: 20px;
+            line-height: 1.6;
+            color: white;
+            text-align: center;
+        }
+
+        .tokenomics-highlight {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4400;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .tokenomics-list {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .tokenomics-list li {
+            font-size: 20px;
+            margin: 15px 0;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="intro-animation">
+        <img src="gigadoodlogowhite.png" alt="GIGADOOD Logo" id="intro-logo">
+    </div>
+    <section class="hero-section">
+        <div class="sunburst"></div>
+        <div class="title">
+            <img src="gigadoodlogo.png" alt="REDDO Title">
+        </div>
+        <div class="logo-container">
+            <img src="logo.jpg" alt="REDDO Logo">
+        </div>
+        <div class="social-icons">
+            <a href="#" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="X"></a>
+            <a href="#" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/telegram-app.png" alt="Telegram"></a>
+            <a href="#" target="_blank"><img src="https://dexscreener.com/favicon.png" alt="DexScreener"></a>
+            <a href="#" target="_blank"><img src="https://raydium.io/favicon.ico" alt="Raydium"></a>
+        </div>
+        <div class="merch">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png" alt="Cart" class="cart-icon">
+        </div>
+    </section>
+    <section class="content-section">
+        <div class="scrolling-banner">
+            <div class="scrolling-text">$GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD</div>
+        </div>
+    <div style="width: 45%; float: right; text-align: center; margin-right: 5%;">
+        <img src="about.png" alt="About" style="width: 300px; margin-bottom: 20px;">
+        <div style="padding: 20px; background: rgba(0,0,0,0.6); border-radius: 15px; margin: 0;">
+            <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+        <p style="font-family: 'Luckiest Guy', cursive; font-size: 28px; line-height: 1.4; color: #ffcc00; text-shadow: 2px 2px 0 #ff4400;">
+            WELCOME TO THE GIGADOOD UNIVERSE!
+        </p>
+        <p style="font-family: 'Luckiest Guy', cursive; font-size: 22px; line-height: 1.6; color: white; text-shadow: 1px 1px 0 #ff4400;">
+            GIGADOOD isn't just another meme coin - it's a MOVEMENT! Born from the depths of crypto culture, our community is all about having FUN while we rocket to the MOON! 🚀
+        </p>
+        <p style="font-family: 'Luckiest Guy', cursive; font-size: 22px; line-height: 1.6; color: white; text-shadow: 1px 1px 0 #ff4400;">
+            Join our wild adventure as we FLIP the crypto world upside down! No complicated roadmaps, just pure GIGADOOD energy and MASSIVE gains!
+        </p>
+        <p style="font-family: 'Luckiest Guy', cursive; font-size: 22px; line-height: 1.6; color: white; text-shadow: 1px 1px 0 #ff4400;">
+            With GIGADOOD, you're not just investing in a token - you're becoming part of a LEGENDARY community that's changing the game! Our holders are the most PASSIONATE in crypto, and together we're building something EXTRAORDINARY! 💎✨
+        </p>
+        </div>
+    </div>
+    </section>
+    <div class="scrolling-banner">
+        <div class="scrolling-text">$GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD</div>
+    </div>
+    <section class="tokenomics-section">
+        <div class="tokenomics-container">
+            <div class="tokenomics-title">TOKENOMICS</div>
+            <div class="tokenomics-highlight">100% FAIR LAUNCH</div>
+            <ul class="tokenomics-list">
+                <li>✨ 0% Tax on Buy and Sell</li>
+                <li>🔒 LP Locked</li>
+                <li>🚫 No Team Tokens</li>
+                <li>🎯 100% of Tokens in Liquidity Pool</li>
+            </ul>
+            <div class="tokenomics-text">
+                GIGADOOD believes in true decentralization and fair distribution. Our launch ensures everyone gets an equal opportunity, with no presale, no private sale, and no team allocation. Just pure, fair trading from day one.
+            </div>
+        </div>
+    </section>
+    <div class="scrolling-banner">
+        <div class="scrolling-text">$GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD</div>
+    </div>
+    <footer>
+        <div class="footer-logo">
+            <img src="gigadoodlogo.png" alt="GIGADOOD">
+        </div>
+        <div class="footer-center">
+            <div class="footer-social">
+                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="X"></a>
+                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/telegram-app.png" alt="Telegram"></a>
+                <a href="#"><img src="https://dexscreener.com/favicon.png" alt="DexScreener"></a>
+                <a href="#"><img src="https://raydium.io/favicon.ico" alt="Raydium"></a>
+            </div>
+            <div class="footer-text">GIGADOOD WHITEPAPER</div>
+        </div>
+        <a href="#" class="buy-now">BUY NOW</a>
+    </footer>
+    <script>
+        // Intro animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const introAnimation = document.getElementById('intro-animation');
+            
+        // Wait exactly for the zoom animation to complete (3.5s) then immediately transition
+        setTimeout(() => {
+            // Instantly hide the intro animation when zoom reaches maximum
+            introAnimation.style.opacity = '0';
+            introAnimation.style.transition = 'opacity 0.2s';
+            
+            // Remove from DOM almost immediately for instant transition
+            setTimeout(() => {
+                introAnimation.style.display = 'none';
+            }, 200);
+        }, 3500);
+        });
+        
+        // Section animations
+        const aboutSection = document.querySelector('.about-section');
+        const tokenomicsSection = document.querySelector('.tokenomics-section');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            } else {
+                entry.target.classList.remove('active');
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    observer.observe(aboutSection);
+    observer.observe(tokenomicsSection);
+</script>
+</body>
+</html>
