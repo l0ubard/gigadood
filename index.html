@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIGADOOD</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    
+    #intro-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #059c00;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        animation: fadeLoader 3.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        overflow: hidden;
+    }
+    
+    #intro-logo {
+        width: 60%;
+        max-width: 600px;
+        animation: zoomIn 3.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+        transform-origin: center;
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+    }
+    
+    @keyframes fadeLoader {
+        0% {
+            opacity: 1;
+            background-color: #059c00;
+        }
+        50% {
+            opacity: 1;
+            background-color: #059c00;
+        }
+        75% {
+            opacity: 0.7;
+            background-color: rgba(5, 156, 0, 0.8);
+        }
+        100% {
+            opacity: 0;
+            background-color: rgba(5, 156, 0, 0);
+        }
+    }
+    
+    @keyframes zoomIn {
+        0% {
+            transform: scale(0.2);
+            opacity: 0.5;
+            filter: blur(0);
+        }
+        30% {
+            transform: scale(0.6);
+            opacity: 1;
+            filter: blur(0);
+        }
+        60% {
+            transform: scale(2);
+            opacity: 0.8;
+            filter: blur(1px);
+        }
+        80% {
+            transform: scale(5);
+            opacity: 0.4;
+            filter: blur(2px);
+        }
+        100% {
+            transform: scale(12);
+            opacity: 0;
+            filter: blur(4px);
+        }
+    }
+
+        .hero-section {
+                    height: 100vh;
+                    width: 100%;
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    background: radial-gradient(circle at center, #ffcc00 0%, #ff4400 100%);
+                    overflow: hidden;
+                    z-index: 1;
+                    animation: background-pan 10s linear infinite, fade-in 1s ease-in-out;
+                }
+        
+                @keyframes fade-in {
+                    from {
+                        opacity: 0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
+                }
+
+        .content-section {
+            min-height: 100vh;
+            width: 100%;
+            background: #1a1a1a url('gigatemp.jpg') top center/cover scroll;
+            position: relative;
+            z-index: 2;
+            margin-top: 0;
+            color: white;
+        }
+        
+        /* Desktop background position */
+        @media (min-width: 769px) {
+            .content-section {
+                background-position: center !important;
+            }
+        }
+        
+        /* Mobile background positioning for about section */
+
+        /* Ensure left positioning for all mobile sizes */
+        @media (max-width: 576px) {
+            .content-section {
+                background-position: left center !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-section {
+                background-position: left center !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .content-section {
+                background-position: left center !important;
+            }
+        }
+
+        .scrolling-banner {
+            width: 100%;
+            height: 100px;
+            background: #000;
+            overflow: hidden;
+            position: relative;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+
+        .scrolling-banner {
+            position: relative;
+        }
+        
+        .scrolling-text {
+            position: absolute;
+            font-size: 72px;
+            font-weight: 900;
+            color: white;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            letter-spacing: 2px;
+            animation: scrollText 20s linear infinite;
+            padding-right: 0;
+        }
+        
+        .scrolling-text::after {
+            content: "$GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD";
+            padding-left: 50px;
+        }
+
+        @keyframes scrollText {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .about-section {
+                    padding: 50px;
+                    max-width: 800px;
+                    margin: 50px auto;
+                    background: rgba(26, 26, 26, 0.9);
+                    border-radius: 15px;
+                    opacity: 0;
+                    transform: translateY(50px);
+                    transition: opacity 1s ease-out, transform 1s ease-out;
+                }
+        
+                .about-section.active {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+        .about-title {
+            font-size: 64px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .about-text {
+            font-size: 20px;
+            line-height: 1.6;
+            color: white;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .sunburst {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: max(200vw, 200vh);
+            height: max(200vw, 200vh);
+            background: repeating-conic-gradient(
+                from 0deg,
+                #059c00 0deg 20deg,
+                #ffa600 20deg 40deg
+            );
+            z-index: -1;
+            animation: rotate 20s linear infinite;
+            transform-origin: center;
+        }
+
+        .title {
+            width: 450px;
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .title img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Large Desktop Screens */
+        @media (min-width: 1441px) {
+            .content-section > div[style] {
+                width: 40% !important;
+                margin-right: 10% !important;
+            }
+            
+            .roadmap-left-container {
+                width: 45%;
+            }
+            
+            .roadmap-content {
+                max-width: 600px;
+            }
+        }
+
+        /* Desktop Screens */
+        @media (max-width: 1440px) {
+            .content-section > div[style] {
+                width: 45% !important;
+                margin-right: 5% !important;
+            }
+        }
+
+        /* Small Desktop and Laptop Screens */
+        @media (max-width: 1200px) {
+            .content-section > div[style] {
+                width: 50% !important;
+                margin-right: 3% !important;
+            }
+            
+            .roadmap-left-container {
+                width: 55%;
+            }
+        }
+
+        /* Tablet Landscape */
+        @media (max-width: 1024px) {
+            .tokenomics-section {
+                background-attachment: scroll !important;
+                background-size: cover !important;
+                background-position: center !important;
+            }
+            
+            .content-section {
+                background-attachment: scroll !important;
+                background-size: cover !important;
+            }
+            
+            .content-section > div[style] {
+                width: 60% !important;
+                float: none !important;
+                margin: 0 auto !important;
+                padding-top: 30px;
+            }
+            
+            .roadmap-section {
+                justify-content: center;
+            }
+            
+            .roadmap-left-container {
+                width: 80%;
+            }
+        }
+
+        /* Tablet Portrait */
+        @media (max-width: 768px) {
+            .scrolling-banner {
+                height: 80px;
+            }
+            
+            .scrolling-text {
+                font-size: 48px;
+            }
+            
+            .scrolling-text::after {
+                font-size: 48px;
+            }
+
+            .title {
+                width: 300px;
+                top: 1rem;
+            }
+
+            .logo-container {
+                width: 270px;
+                height: 270px;
+            }
+
+            .social-icons {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+                bottom: 2rem;
+                width: 90%;
+            }
+
+            .social-icons a {
+                width: 60px;
+                height: 60px;
+            }
+
+            .social-icons img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .tokenomics-container {
+                padding: 30px;
+                margin: 30px 15px;
+            }
+
+            .tokenomics-title {
+                font-size: 42px;
+            }
+
+            .tokenomics-text {
+                font-size: 16px;
+            }
+
+            .tokenomics-highlight {
+                font-size: 20px;
+            }
+
+            .tokenomics-list li {
+                font-size: 16px;
+            }
+
+            footer {
+                padding: 15px;
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .footer-logo {
+                width: 80px;
+            }
+
+            .footer-social {
+                gap: 8px;
+            }
+
+            .footer-social a {
+                width: 36px;
+                height: 36px;
+            }
+
+            .footer-social img {
+                width: 18px;
+                height: 18px;
+            }
+
+            .buy-now {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+
+            .merch {
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            .content-section > div[style] {
+                width: 80% !important;
+            }
+            
+            .roadmap-left-container {
+                width: 90%;
+            }
+            
+            .roadmap-title img {
+                width: 300px;
+            }
+        }
+
+        /* Large Mobile */
+        @media (max-width: 576px) {
+            .hero-section {
+                justify-content: center;
+            }
+            
+            .title {
+                width: 225px;
+                top: 1.5rem;
+            }
+
+            .logo-container {
+                width: 225px;
+                height: 225px;
+                border-width: 3px;
+            }
+
+            .social-icons {
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: center;
+                gap: min(2vw, 0.5rem);
+                position: absolute;
+                bottom: 3rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+            }
+
+            .social-icons a {
+                width: calc(20vw - 10px);
+                max-width: 45px;
+                min-width: 30px;
+                height: calc(20vw - 10px);
+                max-height: 45px;
+                min-height: 30px;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .social-icons img {
+                width: calc(10vw - 5px);
+                max-width: 22px;
+                min-width: 15px;
+                height: calc(10vw - 5px);
+                max-height: 22px;
+                min-height: 15px;
+            }
+
+            .scrolling-banner {
+                height: 60px;
+            }
+
+            .scrolling-text, 
+            .scrolling-text::after {
+                font-size: 36px;
+            }
+            
+            .content-section > div[style] {
+                width: 90% !important;
+                padding-top: 20px;
+            }
+            
+            .content-section > div[style] img {
+                width: 200px !important;
+            }
+            
+            .content-section > div[style] p[style*="font-size: 28px"] {
+                font-size: 24px !important;
+            }
+            
+            .content-section > div[style] p[style*="font-size: 22px"] {
+                font-size: 18px !important;
+            }
+
+            .tokenomics-title {
+                font-size: 32px;
+            }
+            
+            .tokenomics-container {
+                padding: 20px;
+                margin: 20px 15px;
+            }
+
+            .tokenomics-highlight {
+                font-size: 18px;
+            }
+            
+            .tokenomics-list li {
+                font-size: 15px;
+                margin: 10px 0;
+            }
+            
+            .tokenomics-text {
+                font-size: 15px;
+            }
+            
+            .footer-logo {
+                width: 70px;
+            }
+            
+            .footer-text {
+                font-size: 0.9rem;
+            }
+            
+            .buy-now {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .roadmap-left-container {
+                width: 95%;
+            }
+            
+            .roadmap-title img {
+                width: 250px;
+            }
+            
+            .roadmap-phase {
+                padding: 25px;
+            }
+            
+            .roadmap-phase h2 {
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+            
+            .roadmap-phase ul li {
+                font-size: 18px;
+                padding-left: 25px;
+                margin: 12px 0;
+            }
+        }
+        
+        /* Medium Mobile */
+        @media (max-width: 480px) {
+            .title {
+                width: 200px;
+            }
+            
+            .logo-container {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .roadmap-title img {
+                width: 220px;
+            }
+            
+            .roadmap-phase h2 {
+                font-size: 24px;
+            }
+            
+            .roadmap-phase ul li {
+                font-size: 16px;
+            }
+            
+            .nav-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+        
+        /* Small Mobile Devices */
+        @media (max-width: 360px) {
+            .title {
+                width: 180px;
+            }
+            
+            .logo-container {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .social-icons a {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .social-icons img {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .scrolling-text, 
+            .scrolling-text::after {
+                font-size: 28px;
+            }
+            
+            .scrolling-banner {
+                height: 50px;
+            }
+            
+            .content-section > div[style] img {
+                width: 150px !important;
+            }
+            
+            .content-section > div[style] p[style*="font-size: 28px"] {
+                font-size: 20px !important;
+            }
+            
+            .content-section > div[style] p[style*="font-size: 22px"] {
+                font-size: 16px !important;
+            }
+            
+            .tokenomics-title {
+                font-size: 28px;
+            }
+            
+            .tokenomics-highlight {
+                font-size: 16px;
+            }
+            
+            .roadmap-title img {
+                width: 180px;
+            }
+            
+            .roadmap-phase {
+                padding: 20px;
+            }
+            
+            .roadmap-phase h2 {
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+            
+            .roadmap-phase ul li {
+                font-size: 15px;
+                padding-left: 20px;
+                margin: 10px 0;
+            }
+            
+            .nav-arrow {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            
+            .phase-dot {
+                width: 12px;
+                height: 12px;
+                margin: 0 6px;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.03); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .logo-container {
+            width: 330px;
+            height: 330px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid transparent;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 2.5rem;
+            position: absolute;
+            bottom: 5.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .social-icons a {
+            width: 75px;
+            height: 75px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 0 20px rgba(5, 156, 0, 0.5);
+            background: #ffa600;
+        }
+
+        .social-icons img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .merch {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            z-index: 2;
+        }
+
+        .cart-icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        footer {
+            background: #059c00;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 3;
+        }
+
+        .footer-logo {
+            width: 150px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .footer-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .footer-social a {
+            width: 42px;
+            height: 42px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            transform: translateY(-3px);
+        }
+
+        .footer-social img {
+            width: 22px;
+            height: 22px;
+        }
+
+        .footer-text {
+            color: white;
+            font-weight: 900;
+            font-size: 1rem;
+            letter-spacing: 1.5px;
+            margin-top: -4px;
+        }
+
+        .buy-now {
+            background: white;
+            color: black;
+            padding: 12px 35px;
+            border-radius: 100px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .buy-now:hover {
+            transform: translateY(-3px);
+        }
+
+        .tokenomics-section {
+                    min-height: 100vh;
+                    width: 100%;
+                    background: #1a1a1a url('GUESS.jpg') center/cover fixed;
+                            
+                    color: white;
+                    padding: 50px 0;
+                    opacity: 0;
+                    transform: translateY(50px);
+                    transition: opacity 1s ease-out, transform 1s ease-out;
+                }
+        
+                .tokenomics-section.active {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+        .tokenomics-container {
+            padding: 50px;
+            max-width: 800px;
+            margin: 50px auto;
+            border-radius: 15px;
+        }
+
+        .tokenomics-title {
+            font-size: 64px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .tokenomics-text {
+            font-size: 20px;
+            line-height: 1.6;
+            color: white;
+            text-align: center;
+        }
+
+        .tokenomics-highlight {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4400;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .tokenomics-list {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .tokenomics-list li {
+            font-size: 20px;
+            margin: 15px 0;
+            color: white;
+        }
+
+                .roadmap-section {
+                    min-height: 50vh;
+                    width: 100%;
+                    background: url('roadmap.jpg') center/cover no-repeat;
+                    color: white;
+                    padding: 50px 0;
+                    display: flex;
+                    justify-content: flex-start;
+                }
+                
+                /* Mobile background positioning for roadmap section */
+                @media (max-width: 768px) {
+                    .roadmap-section {
+                        background-position: right center !important;
+                    }
+                }
+
+                .roadmap-left-container {
+                    width: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .roadmap-left {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-bottom: 20px;
+                }
+
+                .roadmap-title {
+                    margin-bottom: 20px;
+                    text-align: center;
+                }
+
+                .roadmap-title img {
+                    width: 380px;
+                    height: auto;
+                }
+
+                .roadmap-content {
+                    width: 95%;
+                    max-width: 550px;
+                    position: relative;
+                }
+
+                .roadmap-phase {
+                    background: linear-gradient(145deg, rgba(0, 0, 0, 0.8), rgba(255, 68, 0, 0.3));
+                    border-radius: 15px;
+                    padding: 40px;
+                    margin: 20px 0;
+                    display: none;
+                    animation: fadeEffect 0.5s;
+                    text-align: left;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+                    border: 1px solid rgba(255, 68, 0, 0.3);
+                }
+
+                .roadmap-phase h2 {
+                    font-family: 'Rubik Bubbles', cursive;
+                    color: #ffcc00;
+                    margin-bottom: 30px;
+                    font-size: 40px;
+                    text-shadow: 2px 2px 0 #ff4400;
+                    letter-spacing: 1px;
+                }
+
+                .roadmap-phase ul {
+                    list-style-type: none;
+                    padding-left: 0;
+                }
+
+                .roadmap-phase ul li {
+                    font-family: 'Rubik Bubbles', cursive;
+                    margin: 18px 0;
+                    padding-left: 35px;
+                    position: relative;
+                    font-size: 26px;
+                    color: white;
+                    text-shadow: 1px 1px 0 #ff4400;
+                    letter-spacing: 0.5px;
+                }
+
+                .roadmap-phase ul li:before {
+                    content: "✓";
+                    position: absolute;
+                    left: 0;
+                    color: #ff4400;
+                    font-weight: bold;
+                }
+
+                .roadmap-phase.active {
+                    display: block;
+                }
+
+                @keyframes fadeEffect {
+                    from {opacity: 0; transform: translateY(20px);}
+                    to {opacity: 1; transform: translateY(0);}
+                }
+
+                .roadmap-navigation {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 20px;
+                    width: 100%;
+                }
+
+                .nav-arrow {
+                    background: rgba(255, 68, 0, 0.8);
+                    color: white;
+                    border: none;
+                    border-radius: 50%;
+                    width: 50px;
+                    height: 50px;
+                    font-size: 24px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                }
+
+                .nav-arrow:hover {
+                    background: rgba(255, 68, 0, 1);
+                    transform: scale(1.1);
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+                }
+
+                .phase-indicator {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 15px;
+                }
+
+                .phase-dot {
+                    width: 15px;
+                    height: 15px;
+                    background: rgba(255, 255, 255, 0.5);
+                    border-radius: 50%;
+                    margin: 0 8px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+                }
+
+                .phase-dot.active {
+                    background: #ff4400;
+                    transform: scale(1.3);
+                }
+
+                /* Mobile responsiveness for roadmap section */
+                @media (max-width: 768px) {
+                    .roadmap-section {
+                        padding: 30px 0;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                    }
+                    
+                    .roadmap-left-container {
+                        width: 100%;
+                        margin: 0 auto;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding: 0;
+                    }
+                    
+                    .roadmap-left {
+                        width: 100%;
+                        align-items: center;
+                    }
+                    
+                    .roadmap-content {
+                        width: 85%;
+                        margin: 0 auto;
+                        position: static;
+                    }
+                    
+                    .roadmap-title {
+                        text-align: center;
+                        width: 100%;
+                    }
+                    
+                    .roadmap-title img {
+                        width: 250px;
+                        display: block;
+                        margin: 0 auto;
+                    }
+                    
+                    .roadmap-phase {
+                        margin: 20px auto;
+                        width: 100%;
+                        max-width: 400px;
+                        box-sizing: border-box;
+                        padding: 30px 25px;
+                        left: 0;
+                        right: 0;
+                    }
+                    
+                    .roadmap-phase h2 {
+                        font-size: 24px;
+                        text-align: center;
+                    }
+                    
+                    .roadmap-phase ul {
+                        padding: 0;
+                        margin: 0 auto;
+                        width: 100%;
+                    }
+                    
+                    .roadmap-phase ul li {
+                        font-size: 16px;
+                        text-align: left;
+                        padding-left: 30px;
+                    }
+                    
+                    .roadmap-navigation {
+                        width: 100%;
+                        max-width: 400px;
+                        margin: 20px auto;
+                    }
+                    
+                    .phase-indicator {
+                        margin: 15px auto;
+                    }
+                }
+    </style>
+</head>
+<body>
+    <div id="intro-animation">
+        <img src="gigadoodlogowhite.png" alt="GIGADOOD Logo" id="intro-logo">
+    </div>
+    <section class="hero-section">
+        <div class="sunburst"></div>
+        <div class="title">
+            <img src="gigadoodlogo.png" alt="DOOD Title">
+        </div>
+        <div class="logo-container">
+            <img src="logo.png" alt="DOOD Logo">
+        </div>
+        <div class="social-icons">
+            <a href="https://x.com/Gigadood_" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="X"></a>
+            <a href="https://t.me/gigadood" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/telegram-app.png" alt="Telegram"></a>
+            <a href="#" target="_blank"><img src="https://dexscreener.com/favicon.png" alt="DexScreener"></a>
+            <a href="#" target="_blank"><img src="https://raydium.io/favicon.ico" alt="Raydium"></a>
+        </div>
+    </section>
+    </section>
+<section class="content-section">
+        <div class="scrolling-banner">
+            <div class="scrolling-text">$GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD</div>
+        </div>
+    <div style="width: 45%; float: right; text-align: center; margin-right: 5%;">
+        <img src="about.png" alt="About" style="width: 300px; margin-bottom: 20px;">
+        <div style="padding: 20px; background: rgba(0,0,0,0.6); border-radius: 15px; margin: 0;">
+            <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Baloo+2:wght@500;700&family=Varela+Round&family=Bubblegum+Sans&family=Fredoka+One&family=Rubik+Bubbles&family=Sniglet&family=Chewy&display=swap" rel="stylesheet">
+        <p style="font-family: 'Rubik Bubbles', cursive; font-size: 30px; line-height: 1.2; color: #ffcc00; text-shadow: 2px 2px 0 #ff4400; letter-spacing: 1px; margin-bottom: 10px;">Who's GIGADOOD?</p>
+        <p style="font-family: 'Rubik Bubbles', cursive; font-size: 22px; line-height: 1.3; color: white; text-shadow: 1px 1px 0 #ff4400; letter-spacing: 0.5px; margin-bottom: 10px;">It is said that deep in the abyss of the market, where paper hands weep and devs vanish, a legendary being was born. An alpha? No. A chad? Not powerful enough. He is THE GIGADOOD.</p>
+        <p style="font-family: 'Rubik Bubbles', cursive; font-size: 22px; line-height: 1.3; color: white; text-shadow: 1px 1px 0 #ff4400; letter-spacing: 0.5px; margin-bottom: 10px;">His DNA is forged in eternal liquidity, his mindset tougher than the diamond hands of a 2017 holder, and he knows only one mission: print, dominate, and strike fear into weak hands. His rise is inevitable.</p>
+        <p style="font-family: 'Rubik Bubbles', cursive; font-size: 22px; line-height: 1.3; color: white; text-shadow: 1px 1px 0 #ff4400; letter-spacing: 0.5px; margin-bottom: 15px;">Join the legend. Become a GIGADOOD. Together, we're going to WRECK EVERYTHING!</p>
+        <a href="https://t.me/gigadood" target="_blank" style="display: inline-block; background: #059c00; color: white; padding: 12px 30px; border-radius: 100px; font-weight: 900; font-size: 1.1rem; text-decoration: none; margin-top: 20px; transition: transform 0.3s ease, background 0.3s ease; text-transform: uppercase; font-family: 'Rubik Bubbles', cursive; letter-spacing: 1px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">Join Gigadood</a>
+        </div>
+    </div>
+    </section>
+    <div class="scrolling-banner">
+        <div class="scrolling-text">$GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD</div>
+    </div>
+    <section class="roadmap-section">
+        <div class="roadmap-left-container">
+            <div class="roadmap-left">
+                <div class="roadmap-title">
+                    <img src="roadmap.png" alt="Roadmap">
+                </div>
+            </div>
+            <div class="roadmap-content">
+            <div class="roadmap-phase active" id="phase1">
+                <h2>PHASE 1 – THE CREATION OF THE GIGA EMPIRE</h2>
+                <ul>
+                    <li>Creation of the giga community</li>
+                    <li>Creation of the concept</li>
+                    <li>Creation of the team</li>
+                    <li>Creation of the values</li>
+                    <li>Creation of the FOMO – Shh...</li>
+                </ul>
+            </div>
+            <div class="roadmap-phase" id="phase2">
+                <h2>PHASE 2 – FORGING THE EMPIRE</h2>
+                <ul>
+                    <li>Development of the website</li>
+                    <li>Implementation of community tools</li>
+                    <li>Recruitment of KOLs</li>
+                    <li>Content creation</li>
+                    <li>Branding development</li>
+                </ul>
+            </div>
+            <div class="roadmap-phase" id="phase3">
+                <h2>PHASE 3 – PREPARATION FOR LAUNCH</h2>
+                <ul>
+                    <li>GigaChad marketing strategy</li>
+                    <li>Team preparation</li>
+                    <li>Giveaway organization</li>
+                    <li>Call for future gigas</li>
+                    <li>Finalization</li>
+                </ul>
+            </div>
+            <div class="roadmap-phase" id="phase4">
+                <h2>PHASE 4 – THE LAUNCH: THE GIGADOOD TAKEOVER</h2>
+                <ul>
+                    <li>Launch on Pump.fun</li>
+                    <li>FOMO activation</li>
+                    <li>Community pump</li>
+                    <li>Massive KOL influence</li>
+                    <li>Beginning of the Chad reign</li>
+                </ul>
+            </div>
+            <div class="roadmap-phase" id="phase5">
+                <h2>PHASE 5 – THE ERA OF GIGADOOD</h2>
+                <ul>
+                    <li>Hype maintenance</li>
+                    <li>New partnerships</li>
+                    <li>Expansion of GIGADOOD</li>
+                    <li>Community events</li>
+                    <li>Complete domination of Solana</li>
+                </ul>
+            </div>
+            <div class="roadmap-navigation">
+                <button class="nav-arrow" id="prev-phase">&#8592;</button>
+                <button class="nav-arrow" id="next-phase">&#8594;</button>
+            </div>
+            <div class="phase-indicator">
+                <div class="phase-dot active" data-phase="1"></div>
+                <div class="phase-dot" data-phase="2"></div>
+                <div class="phase-dot" data-phase="3"></div>
+                <div class="phase-dot" data-phase="4"></div>
+                <div class="phase-dot" data-phase="5"></div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <div class="scrolling-banner">
+        <div class="scrolling-text">$GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD</div>
+    </div>
+    
+    <section class="tokenomic2-section" style="background: url('orange.jpg') center/cover local; padding: 50px 0; width: 100%;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <img src="tokenomics.png" alt="Tokenomics" style="width: 300px; height: auto;">
+        </div>
+        
+        <div class="tokenomic2-images">
+            <!-- Desktop layout -->
+            <div class="desktop-images" style="display: flex; flex-wrap: wrap; justify-content: center; max-width: 1200px; margin: 0 auto;">
+                <div style="width: 45%; margin: 10px; text-align: center;">
+                    <img src="1.png" alt="Tokenomic Visual 1" style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+                <div style="width: 45%; margin: 10px; text-align: center;">
+                    <img src="2.png" alt="Tokenomic Visual 2" style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+                <div style="width: 45%; margin: 10px; text-align: center;">
+                    <img src="3.png" alt="Tokenomic Visual 3" style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+                <div style="width: 45%; margin: 10px; text-align: center;">
+                    <img src="4.png" alt="Tokenomic Visual 4" style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </div>
+            
+            <!-- Mobile layout -->
+            <div class="mobile-images" style="display: none; flex-direction: column; align-items: center; max-width: 100%; margin: 0 auto;">
+                <div style="width: 90%; margin: 10px; text-align: center;">
+                    <img src="2.png" alt="Tokenomic Visual 1" style="width: 100%; height: auto;">
+                </div>
+                <div style="width: 90%; margin: 10px; text-align: center;">
+                    <img src="4.png" alt="Tokenomic Visual 2" style="width: 100%; height: auto;">
+                </div>
+                <div style="width: 90%; margin: 10px; text-align: center;">
+                    <img src="3.png" alt="Tokenomic Visual 3" style="width: 100%; height: auto;">
+                </div>
+                <div style="width: 90%; margin: 10px; text-align: center;">
+                    <img src="1.png" alt="Tokenomic Visual 4" style="width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="scrolling-banner">
+        <div class="scrolling-text">$GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD    $GIGADOOD</div>
+    </div>    
+    
+    <footer>
+        <div class="footer-logo">
+            <img src="gigadoodlogo.png" alt="GIGADOOD">
+        </div>
+        <div class="footer-center">
+            <div class="footer-social">
+                <a href="https://x.com/Gigadood_" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="X"></a>
+                <a href="https://t.me/gigadood" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/telegram-app.png" alt="Telegram"></a>
+                <a href="#" target="_blank"><img src="https://dexscreener.com/favicon.png" alt="DexScreener"></a>
+                <a href="#" target="_blank"><img src="https://raydium.io/favicon.ico" alt="Raydium"></a>
+            </div>
+            <div class="footer-text">© 2025 GIGADOOD</div>
+        </div>
+    </footer>
+    <script>
+        // Initialize roadmap navigation immediately
+        function initRoadmapNavigation() {
+            console.log('Initializing roadmap navigation');
+            const phases = document.querySelectorAll('.roadmap-phase');
+            const nextBtn = document.getElementById('next-phase');
+            const prevBtn = document.getElementById('prev-phase');
+            const dots = document.querySelectorAll('.phase-dot');
+            let currentPhase = 0;
+            
+            console.log('Found phases:', phases.length);
+            console.log('Found next button:', nextBtn);
+            console.log('Found prev button:', prevBtn);
+            console.log('Found dots:', dots.length);
+            
+            // Function to show the current phase
+            function showPhase(index) {
+                console.log('Showing phase:', index);
+                // Hide all phases
+                phases.forEach(phase => {
+                    phase.classList.remove('active');
+                });
+                
+                // Show the current phase
+                phases[index].classList.add('active');
+                
+                // Update dots
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                dots[index].classList.add('active');
+                
+                // Update button states
+                prevBtn.style.visibility = index === 0 ? 'hidden' : 'visible';
+                nextBtn.style.visibility = index === phases.length - 1 ? 'hidden' : 'visible';
+            }
+            
+            // Next button click
+            nextBtn.addEventListener('click', function() {
+                console.log('Next button clicked');
+                if (currentPhase < phases.length - 1) {
+                    currentPhase++;
+                    showPhase(currentPhase);
+                }
+            });
+            
+            // Previous button click
+            prevBtn.addEventListener('click', function() {
+                console.log('Previous button clicked');
+                if (currentPhase > 0) {
+                    currentPhase--;
+                    showPhase(currentPhase);
+                }
+            });
+            
+            // Dot click
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    console.log('Dot clicked:', index);
+                    currentPhase = index;
+                    showPhase(currentPhase);
+                });
+            });
+            
+            // Initialize
+            showPhase(currentPhase);
+        }
+
+        // All DOM-related initialization in a single DOMContentLoaded event
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intro animation
+            const introAnimation = document.getElementById('intro-animation');
+            
+            // Wait exactly for the zoom animation to complete (3.5s) then immediately transition
+            setTimeout(() => {
+                // Instantly hide the intro animation when zoom reaches maximum
+                introAnimation.style.opacity = '0';
+                introAnimation.style.transition = 'opacity 0.2s';
+                
+                // Remove from DOM almost immediately for instant transition
+                setTimeout(() => {
+                    introAnimation.style.display = 'none';
+                }, 200);
+            }, 3500);
+            
+            // Section animations
+            const aboutSection = document.querySelector('.about-section');
+            const tokenomicsSection = document.querySelector('.tokenomics-section');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            if (aboutSection) observer.observe(aboutSection);
+            if (tokenomicsSection) observer.observe(tokenomicsSection);
+            
+            // Handle responsive layout for tokenomic2 section
+            function handleResponsiveLayout() {
+                const desktopImages = document.querySelector('.desktop-images');
+                const mobileImages = document.querySelector('.mobile-images');
+                
+                if (window.innerWidth <= 768) {
+                    // Mobile view
+                    if (desktopImages) desktopImages.style.display = 'none';
+                    if (mobileImages) mobileImages.style.display = 'flex';
+                } else {
+                    // Desktop view
+                    if (desktopImages) desktopImages.style.display = 'flex';
+                    if (mobileImages) mobileImages.style.display = 'none';
+                }
+            }
+            
+            // Initial call
+            handleResponsiveLayout();
+            
+            // Listen for window resize
+            window.addEventListener('resize', handleResponsiveLayout);
+            
+            // Initialize roadmap navigation
+            initRoadmapNavigation();
+        });
+
+        // Also initialize roadmap navigation after a short delay to ensure everything is loaded
+        setTimeout(initRoadmapNavigation, 1000);
+</script>
+</body>
